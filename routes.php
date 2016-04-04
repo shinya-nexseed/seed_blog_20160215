@@ -1,10 +1,12 @@
 <?php
-    echo 'routes.phpを通りました<br>';
-    // $arr = explode('/', 'ほげ/ふが/もげ/ほご/あげ');
+    // echo 'routes.phpを通りました<br>';
+    
+    $arr = explode('/', 'ほげ/ふが/もげ/ほご/あげ');
     // var_dump($arr);
 
     $params = explode('/', $_GET['url']);
-    // var_dump($params);
+    var_dump($params);
+    
     // 192.168.33.10/seed_blog/blogs/indexというリクエストがあった場合
     // 192.168.33.10/seed_blog/routes.php?url=blogs/indexとして処理
     // $_GETの中身
@@ -23,7 +25,7 @@
     // コントローラーの呼び出し
     // 作成した変数を文字連結させ、require()を使って
     // 必要なコントローラーファイルを呼び出す
-    echo 'controllers/' . $resource . '_controller.php<br>';
+    // echo 'controllers/' . $resource . '_controller.php<br>';
     require('controllers/' . $resource . '_controller.php');
 ?>
 
