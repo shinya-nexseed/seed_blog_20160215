@@ -46,8 +46,60 @@
             // 返り値として取得データをControllerに返す
             return $result;
         }
+
+        public function create($post) {
+            // データの登録処理
+            // SQL文のINSERTを書いていきます
+            $sql = sprintf('INSERT INTO `blogs` SET `title`="%s", `body`="%s", `delete_flag`=0, `created`=NOW()',
+                    // $post['title'],
+                    // $post['body']
+                    mysqli_real_escape_string($this->dbconnect, $post['title']),
+                    mysqli_real_escape_string($this->dbconnect, $post['body'])
+                );
+
+            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+
+        }
+
+        public function edit($id) {
+            // 編集したいブログ記事一件のデータを取得するSQL文
+            $sql = 'SELECT * FROM `blogs` WHERE `id`=' . $id;
+            $results = mysqli_query($this->dbconnect, $sql) 
+                    or die(mysqli_error($this->dbconnect));
+            $result = mysqli_fetch_assoc($results);
+
+            // 取得したデータ一件が入った$result配列をconttollerに返す
+            return $result;
+        }
+
+        public function update($id, $post) {
+            $sql = sprintf('UPDATE `blogs`
+                            SET `title`="%s", `body`="%s"
+                            WHERE `id`=%d',
+                        mysqli_real_escape_string($this->dbconnect, $post['title']),
+                        mysqli_real_escape_string($this->dbconnect, $post['body']),
+                        $id
+                    );
+
+            mysqli_query($this->dbconnect, $sql) 
+                or die(mysqli_error($this->dbconnect));
+        }
+
+        public function delete($id) {
+            // 物理削除
+            $sql = 'DELETE FROM `blogs` WHERE `id`=' . $id;
+            mysqli_query($this->dbconnect, $sql)
+                or die(mysqli_error($this->dbconnect));
+
+            // 論理削除
+        }
     }
 ?>
+
+
+
+
+
 
 
 

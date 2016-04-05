@@ -17,9 +17,16 @@
     $resource = $params[0]; // 上記リクエストの場合はblogsが格納される
     $action = $params[1]; // 上記リクエストの場合はindexが格納される
     $id = 0; // 初期値0で定義
+    $post = array();
 
     if (isset($params[2])) {
         $id = $params[2];
+    }
+
+    // フォームのデータ($_POST)を受け取る
+    if (isset($_POST) && !empty($_POST)) {
+        $post = $_POST;
+        // var_dump($post);
     }
 
     // コントローラーの呼び出し
