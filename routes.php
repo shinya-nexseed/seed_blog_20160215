@@ -5,7 +5,7 @@
     // var_dump($arr);
 
     $params = explode('/', $_GET['url']);
-    var_dump($params);
+    // var_dump($params);
     
     // 192.168.33.10/seed_blog/blogs/indexというリクエストがあった場合
     // 192.168.33.10/seed_blog/routes.php?url=blogs/indexとして処理

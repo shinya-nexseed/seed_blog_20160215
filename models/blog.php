@@ -17,7 +17,7 @@
         public function index() {
             // index()はデータ(リソース)の一覧を取得し表示するためのメソッド
             // echo 'モデルファイルblog.phpのindex()メソッドが呼ばれました<br>';
-            $sql = 'SELECT * FROM `blogs`';
+            $sql = 'SELECT * FROM `blogs` WHERE `delete_flag`=0';
             $results = mysqli_query($this->dbconnect, $sql) 
                 or die(mysqli_error($this->dbconnect));
 
@@ -87,11 +87,14 @@
 
         public function delete($id) {
             // 物理削除
-            $sql = 'DELETE FROM `blogs` WHERE `id`=' . $id;
-            mysqli_query($this->dbconnect, $sql)
-                or die(mysqli_error($this->dbconnect));
+            // $sql = 'DELETE FROM `blogs` WHERE `id`=' . $id;
+            // mysqli_query($this->dbconnect, $sql)
+            //     or die(mysqli_error($this->dbconnect));
 
             // 論理削除
+            $sql = 'UPDATE `blogs` SET `delete_flag`=1 WHERE `id`=' . $id;
+            mysqli_query($this->dbconnect, $sql)
+                or die(mysqli_error($this->dbconnect));
         }
     }
 ?>
